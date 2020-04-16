@@ -6,7 +6,12 @@ class UserList extends React.Component{
         return(
             <div className="messages-list">
                 <ul>
-                    <User />
+                    {this.props.users.map((user) =>
+                        <User 
+                        activate_user={this.props.activate_user}
+                        user={user} 
+                        />
+                    )}
                 </ul>
             </div>
         )
