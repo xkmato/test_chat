@@ -6,7 +6,9 @@ class Convos extends React.Component{
     render(){
         return(
             <div className="conversation-container">
-                <Convo />
+                {this.props.active_user.messages.map((message) =>
+                    <Convo message={message}/>
+                )}
             </div> 
         )
     }

@@ -2,16 +2,17 @@ import React from 'react';
 
 class Convo extends React.Component{
     render(){
+        let message = this.props.message
         return(
-            <div className="convo-box pull-right">
-                <div className="convo-area">
+            <div className={message.is_current_user ? 'convo-box pull-right' : 'convo-box convo-left'}>
+                <div className={message.is_current_user ? 'convo-area' : 'convo-area convo-left'}>
                     <div className="convo-message">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>
+                        <p>{message.message.text}</p>
                     </div>
-                    <span>Sat, Aug 23, 1:08 PM</span>
+                    <span>{message.sent_on}</span>
                 </div>
                 <div className="convo-img">
-                    <img src="http://themashabrand.com/templates/Fluffs/assets/img/users/2.jpg" class="img-responsive img-circle" />
+                    <img src={message.user_image_url} className="img-responsive img-circle" />
                 </div>
             </div>
         )

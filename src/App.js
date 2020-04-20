@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MessageBox from './Components/MessageBox';
+import Login from './Components/Login';
 
 function App() {
   return (
-    <MessageBox />
+    <Login />
   );
 }
 
