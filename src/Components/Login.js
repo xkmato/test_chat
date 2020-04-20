@@ -1,10 +1,17 @@
 import React from 'react';
+import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 
 class Login extends React.Component{
     constructor(props){
         super(props);
 
-        this.state = {username: '', password: ''};
+        this.state = {
+            username: '', 
+            password: '',
+            error: false,
+            isLoggedIn: false
+        };
 
         this.setPassword = this.setPassword.bind(this);
         this.setUsername = this.setUsername.bind(this);
@@ -21,7 +28,18 @@ class Login extends React.Component{
 
     handleSubmit(e){
         e.preventDefault()
-        alert("Submition :"+ this.state.username + ":" + this.state.password);
+        axios.post("/api/user/login/", {
+            username: this.state.username,
+            password:this.state.password
+        }).then(result => {
+            if (result.status === 200){
+                console.log(result.data)
+                this.props.handleLogin(result.data)
+            } else {
+                this.setError(true)
+                console.log(result.data)
+            }
+        })
         this.setState({password:"", username:""});
     }
     render(){
@@ -46,7 +64,7 @@ class Login extends React.Component{
                             onChange={this.setUsername}
                             />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <input 
                             type="password" 
                             className="form-control" 
