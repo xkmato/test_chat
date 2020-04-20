@@ -9,6 +9,8 @@ class MessageBox extends React.Component{
     constructor(props){
         super(props);
 
+        this.state = {users: [], search_results: "", active_user: {}}
+
         this.activate_user = this.activate_user.bind(this);
         this.search = this.search.bind(this);
     }
