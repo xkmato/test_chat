@@ -10,6 +10,7 @@ class UserList extends React.Component{
                         <User 
                         activate_user={this.props.activate_user}
                         user={user} 
+                        key={user.id}
                         />
                     )}
                 </ul>
