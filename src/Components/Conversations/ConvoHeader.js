@@ -2,15 +2,16 @@ import React from 'react';
 
 class ConvoHeader extends React.Component{
     render(){
+        const picture_url = `http://localhost:8000/${this.props.active_user.picture_url}`
         return(
             <div className="conversation-header">
                 <div className="user-message-details">
                     <div className="user-message-img">
-                        <img src="http://themashabrand.com/templates/Fluffs/assets/img/users/6.jpg" className="img-responsive img-circle" />
+                        <img src={picture_url} className="img-responsive img-circle" />
                     </div>
                     <div className="user-message-info">
-                        <h4>John Doe</h4>
-                        <p>Online</p>
+                        <h4>{this.props.active_user.name}</h4>
+                        <p>{this.props.active_user.is_online ? 'online': 'offline'}</p>
                     </div>
                 </div>
                 <a href="#" title=""><i className="fa fa-ellipsis-v"></i></a>
