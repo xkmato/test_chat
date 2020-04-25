@@ -33,7 +33,6 @@ class Login extends React.Component{
             password:this.state.password
         }).then(result => {
             if (result.status === 200){
-                console.log(result.data)
                 this.props.handleLogin(result.data)
             } else {
                 this.setError(true)
