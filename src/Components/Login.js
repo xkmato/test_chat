@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
 
 class Login extends React.Component{
     constructor(props){
@@ -10,12 +9,12 @@ class Login extends React.Component{
             username: '', 
             password: '',
             error: false,
-            isLoggedIn: false
         };
 
         this.setPassword = this.setPassword.bind(this);
         this.setUsername = this.setUsername.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.setError = this.setError.bind(this)
     }
 
     setPassword(e){
@@ -24,6 +23,10 @@ class Login extends React.Component{
 
     setUsername(e){
         this.setState({username: e.target.value});
+    }
+
+    setError(error){
+        this.setState({error: error})
     }
 
     handleSubmit(e){
@@ -39,7 +42,6 @@ class Login extends React.Component{
                 console.log(result.data)
             }
         })
-        this.setState({password:"", username:""});
     }
     render(){
         return(

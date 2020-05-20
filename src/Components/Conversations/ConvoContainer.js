@@ -4,6 +4,7 @@ import UserList from '../Users/UserList';
 import Convos from './Convos';
 import CreateConvo from './CreateConvo';
 import ConvoHeader from './ConvoHeader';
+import User from "../Users/User";
 
 
 class ConvoContainer extends React.Component{
@@ -11,14 +12,10 @@ class ConvoContainer extends React.Component{
         super(props)
 
         this.state = {
-            active_user: {
-                comrade_id: "6d15d35f-ad98-4224-bce1-6ea3187bb0a2",
-                phone: "+256701234568",
-                is_online: false,
-                picture_url: "profile_pics/Big_Conversations.png",
-                id: 2
-            }
+            active_user: {},
+            search_results: []
         }
+
 
         this.activate_user = this.activate_user.bind(this);
         this.search = this.search.bind(this);
@@ -37,26 +34,30 @@ class ConvoContainer extends React.Component{
     }
 
     render(){
-        let active_user;
-        if(this.state.active_user == null || this.props.users.length > 0){
-            active_user = this.props.users[0]
-        } else {
-            active_user = this.state.active_user
-        }
         return(
             <div className="messages-box">
                 <div className="row">
                     <div className="col-lg-4 col-md-12 no-pdd">
                         <div className="messages-container">
                             <Search search={this.search}/>
-                            <UserList activate_user={this.activate_user} users={this.props.users}/>
+                            <div className="messages-list">
+                                <ul>
+                                    {this.state.users.map((user) =>
+                                        <User
+                                            activate_user={this.activate_user}
+                                            user={user}
+                                            key={user.id}
+                                        />
+                                    )}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div className="col-lg-8 col-md-12 pd-right-none pd-left-none">
                         <div className="conversation-box">
-                            <ConvoHeader active_user={active_user}/>
-                            <Convos active_user={active_user} token={this.props.token}/>
-                            <CreateConvo active_user={active_user}/>
+                            <ConvoHeader active_user={this.state.active_user}/>
+                            <Convos active_user={this.state.active_user} token={this.props.token}/>
+                            <CreateConvo active_user={this.state.active_user}/>
                         </div>
                     </div>
                 </div>

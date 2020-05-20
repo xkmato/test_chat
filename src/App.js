@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import MessageBox from './Components/MessageBox';
+import ConvoContainer from './Components/Conversations/ConvoContainer';
 import Login from './Components/Login';
 
 class App extends React.Component{
@@ -18,11 +18,11 @@ class App extends React.Component{
   render(){
     if (this.state.isLoggedIn){
       return (
-        <MessageBox token={this.state.token}/>
+        <ConvoContainer token={this.state.token}/>
       )
     }else {
       return (<Login handleLogin={this.handleLogin}/>)
-    };
+    }
   }
 }
 

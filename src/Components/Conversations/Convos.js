@@ -12,7 +12,6 @@ class Convos extends React.Component{
     }
 
     fetch_conversation(active_user_id){
-        console.log(`fetching conversation for user ${active_user_id}`)
         axios.get(`/api/messages/conversations/${active_user_id}/`, {
             headers: {
                 'Authorization': `Token ${this.props.token}`
@@ -30,22 +29,16 @@ class Convos extends React.Component{
     }
 
     componentDidMount(){
-        this.fetch_conversation(this.props.active_user.id)
-     }
-    
-    static getDerivedStateFromProps(props, state) {
-        if(typeof props.active_user.id != 'undefined'){
-            return {
-                active_user: props.active_user
-            }
+        if(typeof this.props.active_user.id != 'undefined') {
+            this.fetch_conversation(this.props.active_user.id)
         }
-        return null
-    }
+     }
+
     render(){
         return(
             <div className="conversation-container">
                 {this.state.messages.map((message) =>
-                    <Convo message={message}/>
+                    <Convo message={message} key={message.id}/>
                 )}
             </div> 
         )
